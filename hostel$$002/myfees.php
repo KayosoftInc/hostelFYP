@@ -41,8 +41,8 @@ check_login();
 							<form method="post" action="reference.php">
 							<input type="submit" name="reference" class="btn btn-primary btn-block" value="Generate a pay reference Number" style="font-weight: 30px; font-size: 2rem;"  >
 							<span style="width:100%;">
-							<input type="submit" name="" class="btn btn-primary btn-block" value="Pay Through MTN momo" style=" width:40%; float:left; margin: 10px; background-color: yellow; color: black; font-weight: 30px; font-size: 2rem;" >
-							<input type="submit" name="" class="btn btn-primary btn-block" value="Pay Through Airtel Money" style="width:40%; margin: 10px; background-color: red; color: white; font-weight: 30px; font-size: 2rem;" >
+							<button name="" class="btn btn-primary btn-block" style=" width:40%; float:left; background-color:#fff; margin: 10px; border:1px solid yellow;  color: black; font-weight: 30px;" ><img src='img/mtn.png'></button>
+							<button name="" class="btn btn-primary btn-block" style=" width:40%; float:left; background-color:#fff; margin: 10px; border:1px solid #FF0000;  color: black; font-weight: 30px;" ><img src='img/airtel.png'></button>
 							</span>
 							</form>
 						</span>
