@@ -113,7 +113,7 @@ return true;
 				<div class="row">
 					<div class="col-md-12">
 					
-						<h2 class="page-title">MTN mobile money </h2>
+						<h2 class="page-title">Mobile Money Payment </h2>
 
 						<div class="row">
 					<div class="col-md-6 col-md-offset-3">
@@ -122,7 +122,7 @@ return true;
 							
 								<form action="mtn.php" class="mt" method="post">
 									<label for="" class="text-uppercase text-sm">Mobile Number</label>
-									<input type="text" placeholder="256787539824" name="phone_no" class="form-control mb" required>
+									<input type="number" placeholder="2567XXXXXXXX" name="phone_no" class="form-control mb" required>
 									<label for="" class="text-uppercase text-sm">Amount</label>
 									<input type="number" placeholder="50000.00 and Above" name="amount" class="form-control mb" required>
 									
