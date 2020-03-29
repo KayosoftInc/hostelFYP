@@ -1,42 +1,76 @@
-<!--?php <br ?--> //Testing Mobile money incoming
+
 <?php 
 include('includes/config.php');
+include('includes/db.php');
+// include('includes/checklogin.php');
+// check_login();
+// $aid=$_SESSION['id'];
 $error = "";
 if(isset($_POST['pay']))
 {
     $amount=$_POST['amount'];
     $phoneNo=$_POST['phone_no'];
-    $ref=rand(1,100000000000);
+    $ref=rand(100000000000,999999999999);
     
 
-$url = 'https://www.easypay.co.ug/api/'; 
- $payload = array( 'username' => '5046664e79350817', 
- 'password' => 'a19adac4dcd78f50', 
- 'action' => 'mmdeposit', 
- 'amount' => $amount, 
- 'phone'=> $phoneNo, 
- 'currency'=>'UGX', 
- 'reference'=>$ref, 
- 'reason'=>'Testing MM DEPOSIT' 
- ); 
+// $url = 'https://www.easypay.co.ug/api/'; 
+//  $payload = array( 'username' => '5046664e79350817', 
+//  'password' => 'a19adac4dcd78f50', 
+//  'action' => 'mmdeposit', 
+//  'amount' => $amount, 
+//  'phone'=> $phoneNo, 
+//  'currency'=>'UGX', 
+//  'reference'=>$ref, 
+//  'reason'=>'Hostel Payment' 
+//  ); 
   
- //open connection 
- $ch = curl_init(); 
+//  //open connection 
+//  $ch = curl_init(); 
   
- //set the url, number of POST vars, POST data 
- curl_setopt($ch,CURLOPT_URL, $url); 
- curl_setopt($ch,CURLOPT_POSTFIELDS, json_encode($payload)); 
- curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0); 
- curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0); 
- curl_setopt($ch, CURLOPT_CONNECTTIMEOUT ,15); 
- curl_setopt($ch, CURLOPT_TIMEOUT, 400); //timeout in seconds 
- curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
- //execute post 
- $result = curl_exec($ch); 
+//  //set the url, number of POST vars, POST data 
+//  curl_setopt($ch,CURLOPT_URL, $url); 
+//  curl_setopt($ch,CURLOPT_POSTFIELDS, json_encode($payload)); 
+//  curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0); 
+//  curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0); 
+//  curl_setopt($ch, CURLOPT_CONNECTTIMEOUT ,15); 
+//  curl_setopt($ch, CURLOPT_TIMEOUT, 400); //timeout in seconds 
+//  curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+//  //execute post 
+//  $result = curl_exec($ch); 
   
- //close connection 
- curl_close($ch); 
- print_r(json_decode($result)); 
+//  //close connection 
+//  curl_close($ch); 
+//  print_r(json_decode($result)); 
+ $aid = 21;
+ $tal = 1;
+if($tal == 1){
+      $ret="select * from transaction where user_id=?";
+      $stmt= $mysqli->prepare($ret) ;
+      $stmt->bind_param('i',$aid);
+      $stmt->execute() ;
+      $res=$stmt->get_result();
+      $cnt=1;
+      while($row=$res->fetch_object())
+          {
+            
+            $total_amount=$row->total_amount;
+            $balance=$row->amount_paid;
+          
+
+            
+          }
+          $new_bal = $balance - $amount;
+          $bank = "Airtel Money";
+          $branch = "";
+          $reason = "Hostel Fee Payment";
+      $query="insert into  transaction(user_id,invoiceno,bank,branch,total_amount,amount_paid,balance,detail) values(?,?,?,?,?,?,?,?)";
+      $stmt = $mysqli->prepare($query);
+      $rc=$stmt->bind_param('iissiiis',$aid,$ref,$bank,$branch,$total_amount,$amount,$new_bal,$reason);
+      $stmt->execute();
+      echo"<script>alert('Fees Succssfully Done');</script>";
+}else{
+
+}
 
 ?>
 <htm>
