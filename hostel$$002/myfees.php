@@ -90,7 +90,7 @@ while($row=$res->fetch_object())
 	  	?>
 <tr>
 <td><?php echo $row->id;?></td>
-<td><?php echo $row->invoice_no;?></td>
+<td>#########</td>
 <td><?php echo $row->amount.'.00';?></td>
 <td><?php echo $row->paid.'.00';?></td>
 <td><?php echo $row->due.'.00';?></td>

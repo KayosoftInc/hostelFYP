@@ -3,6 +3,7 @@ session_start();
 include('includes/config.php');
 include('includes/checklogin.php');
 check_login();
+$aid=$_SESSION['id'];
 //code for registration
 if(isset($_POST['submit']))
 {
@@ -32,10 +33,23 @@ $paddress=$_POST['paddress'];
 $pcity=$_POST['pcity'];
 $pstate=$_POST['pstate'];
 $ppincode=$_POST['ppincode'];
+
+
+$paid = 0;
+$rsn = "Payment of Hostel Fees";
+$perc = 0;
+
 $query="insert into  registration(roomno,seater,feespm,foodstatus,stayfrom,duration,course,regno,firstName,middleName,lastName,gender,contactno,emailid,egycontactno,guardianName,guardianRelation,guardianContactno,corresAddress,corresCIty,corresState,corresPincode,pmntAddress,pmntCity,pmnatetState,pmntPincode) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 $stmt = $mysqli->prepare($query);
 $rc=$stmt->bind_param('iiiisissssssisississsisssi',$roomno,$seater,$feespm,$foodstatus,$stayfrom,$duration,$course,$regno,$fname,$mname,$lname,$gender,$contactno,$emailid,$emcntno,$gurname,$gurrelation,$gurcntno,$caddress,$ccity,$cstate,$cpincode,$paddress,$pcity,$pstate,$ppincode);
 $stmt->execute();
+
+
+$sql="insert into  hostel_fee(user_id,amount,paid,due,detail,percentage) values(?,?,?,?,?,?)";
+$pro = $mysqli->prepare($sql);
+$cr=$pro->bind_param('iiiisi',$aid,$feespm,$paid,$feespm,$rsn,$perc);
+$pro->execute();
+
 echo"<script>alert('Student Succssfully register');</script>";
 }
 ?>
