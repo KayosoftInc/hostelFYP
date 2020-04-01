@@ -1,10 +1,10 @@
 
 <?php 
+session_start();
 include('includes/config.php');
-include('includes/db.php');
-// include('includes/checklogin.php');
-// check_login();
-// $aid=$_SESSION['id'];
+include('includes/checklogin.php');
+check_login();
+
 $error = "";
 if(isset($_POST['pay']))
 {
@@ -41,7 +41,7 @@ if(isset($_POST['pay']))
 //  //close connection 
 //  curl_close($ch); 
 //  print_r(json_decode($result)); 
- $aid = 21;
+$aid=$_SESSION['id'];
  $tal = 1;
 if($tal == 1){
       $ret="select * from transaction where user_id=?";
