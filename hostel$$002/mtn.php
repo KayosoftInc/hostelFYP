@@ -1,16 +1,16 @@
 
 <?php 
+session_start();
 include('includes/config.php');
-include('includes/db.php');
-// include('includes/checklogin.php');
-// check_login();
-// $aid=$_SESSION['id'];
+include('includes/checklogin.php');
+check_login();
+
 $error = "";
 if(isset($_POST['pay']))
 {
     $amount=$_POST['amount'];
     $phoneNo=$_POST['phone_no'];
-    $ref=rand(100000000000,999999999999);
+    $ref=rand(1,10000000000);
     
 
 // $url = 'https://www.easypay.co.ug/api/'; 
@@ -41,32 +41,43 @@ if(isset($_POST['pay']))
 //  //close connection 
 //  curl_close($ch); 
 //  print_r(json_decode($result)); 
- $aid = 21;
+$aid=$_SESSION['id'];
  $tal = 1;
 if($tal == 1){
-      $ret="select * from transaction where user_id=?";
+      $ret="select * from hostel_fee where user_id=?";
       $stmt= $mysqli->prepare($ret) ;
       $stmt->bind_param('i',$aid);
       $stmt->execute() ;
       $res=$stmt->get_result();
-      $cnt=1;
+      
       while($row=$res->fetch_object())
           {
             
-            $total_amount=$row->total_amount;
-            $balance=$row->amount_paid;
+            $total_amount=$row->amount;
+            $balance=$row->due;
           
 
             
           }
           $new_bal = $balance - $amount;
           $bank = "Airtel Money";
-          $branch = "";
+          $branch = "-";
           $reason = "Hostel Fee Payment";
+          $cur_paymt = ($total_amount - $new_bal);
+          $percentage = ($cur_paymt/$total_amount)*100;
+          
       $query="insert into  transaction(user_id,invoiceno,bank,branch,total_amount,amount_paid,balance,detail) values(?,?,?,?,?,?,?,?)";
       $stmt = $mysqli->prepare($query);
       $rc=$stmt->bind_param('iissiiis',$aid,$ref,$bank,$branch,$total_amount,$amount,$new_bal,$reason);
       $stmt->execute();
+      
+      
+      $udate = date('Y-m-d h:i:s', time());
+      $sql="update  hostel_fee set paid=?,due=?,percentage=?,updationDate=? where user_id=?";
+      $pro = $mysqli->prepare($sql);
+      $cr=$pro->bind_param('iiisi',$cur_paymt,$new_bal,$percentage,$udate,$aid);
+      $pro->execute();
+            echo($cur_paymt . $udate . $percentage . $aid . $new_bal . $amount . "       ");
       echo"<script>alert('Fees Succssfully Done');</script>";
 }else{
 
@@ -95,7 +106,7 @@ if($tal == 1){
         </button>
       </div>
       <div class="modal-body">
-        ...
+        <a href="https://localhost/hostelFYP/hostel$$002/myfees.php">Back</a>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
