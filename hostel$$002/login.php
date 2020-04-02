@@ -5,7 +5,7 @@ $error = "";
 if(isset($_POST['login']))
 {
 $email=$_POST['email'];
-$password=$_POST['password'];
+$password=md5($_POST['password']);
 $stmt=$mysqli->prepare("SELECT email,password,id FROM userregistration WHERE email=? and password=? ");
 				$stmt->bind_param('ss',$email,$password);
 				$stmt->execute();
