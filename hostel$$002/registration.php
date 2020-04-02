@@ -11,7 +11,7 @@ $lname=$_POST['lname'];
 $gender=$_POST['gender'];
 $contactno=$_POST['contact'];
 $emailid=$_POST['email'];
-$password=$_POST['password'];
+$password=md5($_POST['password']);
 /*$img=file_get_contents($_FILES["image"]["name"]);
 echo ($img);*/
 $target_dir = "uploads/";

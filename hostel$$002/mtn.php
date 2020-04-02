@@ -10,7 +10,7 @@ if(isset($_POST['pay']))
 {
     $amount=$_POST['amount'];
     $phoneNo=$_POST['phone_no'];
-    $ref=rand(1,10000000000);
+    $ref=mt_rand(1000000000,9999999999);
     
 
 // $url = 'https://www.easypay.co.ug/api/'; 
@@ -41,6 +41,7 @@ if(isset($_POST['pay']))
 //  //close connection 
 //  curl_close($ch); 
 //  print_r(json_decode($result)); 
+
 $aid=$_SESSION['id'];
  $tal = 1;
 if($tal == 1){

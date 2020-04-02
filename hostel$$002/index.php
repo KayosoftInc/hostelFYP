@@ -78,7 +78,7 @@ return true;
 <body>
 	
 	<div class="ts-main-content">
-		<?php include('includes/sidebar.php');?>
+		<?php //include('includes/sidebar.php');?>
 		<div class="content-wrapper">
 			<div class="container-fluid">
 
@@ -108,6 +108,7 @@ return true;
 						</div>
 						<div class="text-center text-light" style="color:black;">
 							<a href="forgot-password.php" style="color:black;">Forgot password?</a>
+							<a href="registration.php">New User | SignUp?</a>
 						</div>
 					</div>
 				</div>
