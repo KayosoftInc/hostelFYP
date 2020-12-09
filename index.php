@@ -47,7 +47,7 @@
 		</div>
 		<div class="header_side d-flex flex-row justify-content-center align-items-center">
 			<img src="images/phone-call.svg" alt="">
-			<span>+256 4566 7788 2457</span>
+			<span>+256 787539824</span>
 		</div>
 
 		<!-- Hamburger -->
